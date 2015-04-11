@@ -6,6 +6,7 @@ class SlackFeedbackGrailsPlugin {
     // resources that are excluded from plugin packaging
     def pluginExcludes = [
         "grails-app/views/error.gsp",
+        "grails-app/views/test/index.gsp",
 		"grails-app/controllers/com/theconnman/feedback/Test.groovy"
     ]
 
