@@ -10,13 +10,14 @@ class SlackFeedbackService {
 	def springSecurityService
 
 	boolean send(String feedback) {
+		String user = springSecurityService?.currentUser ? springSecurityService.currentUser.username : (grails.util.Metadata.current.'app.name' + ' Feedback');
 		def config = grailsApplication.mergedConfig.grails.plugin.slackfeedback;
 		RestBuilder rest = new RestBuilder();
 		try {
 			def resp = rest.post(config.webhook) {
 				json {
 					text = feedback
-					username = springSecurityService ? springSecurityService.currentUser.username : (grails.util.Metadata.current.'app.name' + ' Feedback')
+					username = user
 				}
 			}
 			return true;
