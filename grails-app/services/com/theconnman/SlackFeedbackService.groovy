@@ -18,6 +18,7 @@ class SlackFeedbackService {
 				json {
 					text = feedback
 					username = user
+					channel = config.channel
 				}
 			}
 			return true;
