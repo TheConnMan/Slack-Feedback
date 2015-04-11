@@ -29,7 +29,8 @@ log4j = {
 grails {
 	plugin {
 		slackfeedback {
-			
+			webhook = localConfig.slackfeedback.webhook
+			channel = localConfig.slackfeedback.channel
 		}
 	}
 }

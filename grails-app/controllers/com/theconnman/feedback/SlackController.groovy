@@ -4,7 +4,9 @@ import grails.converters.JSON
 
 class SlackController {
 
+	def slackFeedbackService
+
     def submit() {
-		render([success: true] as JSON)
+		render([success: slackFeedbackService.send(params.feedback)] as JSON)
 	}
 }
