@@ -12,8 +12,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js" charset="utf-8"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.6/semantic.min.js" charset="utf-8"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.6/semantic.min.css" type="text/css">
-		<g:layoutHead/>
-		<g:javascript library="application"/>		
+		<g:layoutHead/>	
 		<r:layoutResources />
 	</head>
 	<body>
