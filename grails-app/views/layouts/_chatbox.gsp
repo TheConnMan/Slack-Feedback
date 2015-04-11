@@ -12,6 +12,6 @@
 	</div>
 	<div class="actions">
 		<div class="ui button">Cancel</div>
-		<div class="ui green button">Send</div>
+		<div class="ui green button" onclick="submitSlackFeedback()">Send</div>
 	</div>
 </div>
