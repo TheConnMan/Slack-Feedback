@@ -16,12 +16,12 @@ class SlackFeedbackGrailsPlugin {
     def description = 'Chat box for quick app feedback sent to a Slack channel.'
 
     // URL to the plugin's documentation
-    def documentation = "http://grails.org/plugin/slack-feedback"
+    def documentation = "https://github.com/TheConnMan/Slack-Feedback"
 
     // Extra (optional) plugin metadata
 
     // License: one of 'APACHE', 'GPL2', 'GPL3'
-//    def license = "APACHE"
+    def license = "APACHE"
 
     // Details of company behind the plugin (if there is one)
 //    def organization = [ name: "My Company", url: "http://www.my-company.com/" ]
@@ -30,10 +30,10 @@ class SlackFeedbackGrailsPlugin {
 //    def developers = [ [ name: "Joe Bloggs", email: "joe@bloggs.net" ]]
 
     // Location of the plugin's issue tracker.
-//    def issueManagement = [ system: "JIRA", url: "http://jira.grails.org/browse/GPMYPLUGIN" ]
+    def issueManagement = [ system: "GitHub", url: "https://github.com/TheConnMan/Slack-Feedback/issues" ]
 
     // Online location of the plugin's browseable source code.
-//    def scm = [ url: "http://svn.codehaus.org/grails-plugins/" ]
+    def scm = [ url: "https://github.com/TheConnMan/Slack-Feedback" ]
 
     def doWithWebDescriptor = { xml ->
         // TODO Implement additions to web.xml (optional), this event occurs before
