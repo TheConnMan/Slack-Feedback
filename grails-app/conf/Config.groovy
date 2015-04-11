@@ -1,5 +1,10 @@
 // configuration for plugin testing - will not be included in the plugin zip
 
+def loc = ['../UserConfig.groovy', 'webapps/ROOT/Jenkins.groovy'].grep { new File(it).exists() }.first();
+def localConfig = new ConfigSlurper(grailsSettings.grailsEnv).parse(new File(loc).toURI().toURL())
+
+grails.app.context = '/'
+
 log4j = {
     // Example of changing the log pattern for the default console
     // appender:
@@ -19,4 +24,12 @@ log4j = {
            'org.springframework',
            'org.hibernate',
            'net.sf.ehcache.hibernate'
+}
+
+grails {
+	plugin {
+		slackfeedback {
+			
+		}
+	}
 }
