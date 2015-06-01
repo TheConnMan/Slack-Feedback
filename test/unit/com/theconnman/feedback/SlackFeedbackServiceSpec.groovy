@@ -1,4 +1,6 @@
-package com.theconnman
+package com.theconnman.feedback
+
+import com.theconnman.feedback.SlackFeedbackService;
 
 import grails.test.mixin.TestFor
 import spock.lang.Specification

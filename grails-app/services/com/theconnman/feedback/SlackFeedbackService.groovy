@@ -1,4 +1,4 @@
-package com.theconnman
+package com.theconnman.feedback
 
 import grails.plugins.rest.client.RestBuilder
 import grails.transaction.Transactional
