@@ -45,5 +45,6 @@ grails.project.dependency.resolution = {
 		}
 		compile ":plugin-config:0.2.0"
 		compile ":rest-client-builder:1.0.3"
+		compile ":hibernate:3.6.10.17"
     }
 }
