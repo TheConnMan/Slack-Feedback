@@ -1,7 +1,7 @@
 Slack Feedback
 =========
 
-Chat box for quick app feedback sent to a Slack channel from a Grails project.
+Chat box for quick app feedback sent to a Slack channel from a Grails project. Optionally the plugin can be configured to allow responses from Slack back to the application users.
 
 ## Requirements
 
@@ -18,10 +18,19 @@ Chat box for quick app feedback sent to a Slack channel from a Grails project.
 
 ### Slack
 
+#### Required
+
 - Create an [Incoming WebHooks integration](https://my.slack.com/services/new/incoming-webhook)
 - Select a channel to post messages to
 	- **NOTE:** This can be overwritten in the config. This is helpful if multiple projects use the same webhook.
 - Add the WebHook url to the config as shown below
+
+#### Optional
+
+- Create an [Outgoing WebHooks integraion](https://my.slack.com/services/new/outgoing-webhook)
+- Select a channel to post messages to
+- Add a set of trigger words
+- Add `[url]/slack/post` where `[url]` is the URL of your publicly visible Grails application
 
 ### Config
 
@@ -30,7 +39,7 @@ All config items contain the prefix **grails.plugin.slackfeedback.**
 **NOTE:** Config items with * after them are secret information. It is highly reccommended to put this information in secret files and pull it into the Grails project at runtime.
 
 - **webhook** - The Incoming WebHook URL provided by Slack*
-- **token** - The Outgoing WebHook token provided by Slack* [Optional]
+- **token** - The Outgoing WebHook token provided by Slack* [Required for Outgoing WebHooks]
 - **channel** - The channel to post to [Optional]
 
 ## Use
