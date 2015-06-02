@@ -31,6 +31,7 @@ grails {
 		slackfeedback {
 			webhook = localConfig.slackfeedback.webhook
 			token = localConfig.slackfeedback.token
+			userDomainClassName = 'com.theconnman.feedback.User'
 		}
 	}
 }

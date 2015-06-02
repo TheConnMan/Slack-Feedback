@@ -32,7 +32,7 @@ class SlackFeedbackService {
 	}
 
 	boolean save(String feedback) {
-		User user = springSecurityService.currentUser;
+		def user = springSecurityService.currentUser;
 		try {
 			new Message(user: user, text: feedback[0..(Math.min(feedback.size(), 5000) - 1)]).save();
 			return true;
@@ -47,7 +47,8 @@ class SlackFeedbackService {
 			return 'No delimiter found, make sure to construct the message in the form [trigger word] [username]: [message]';
 		} else {
 			String username = textArray.first();
-			User user = User.findByUsername(username);
+			def User = getUserDomain();
+			def user = User.findByUsername(username);
 			if (!user) {
 				return 'No user by the name of ' + username + ' found'
 			} else {
@@ -56,5 +57,10 @@ class SlackFeedbackService {
 				return '';
 			}
 		}
+	}
+
+	def getUserDomain() {
+		String className = grailsApplication.mergedConfig.grails.plugin.slackfeedback.userDomainClassName;
+		return grailsApplication.getClassForName(className);
 	}
 }
