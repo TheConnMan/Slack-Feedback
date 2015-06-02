@@ -42,7 +42,7 @@ To trigger the modals contined within the template call the JavaScript function 
 <div class="ui primary button" onclick="slackFeedback()">Feedback</div>
 ```
 
-### Parameters
+### Layout Parameters
 
 The **chatbox** template takes multiple optional parameters which customize the modals. These are passed in `model` attribute as a map. An example is shown below:
 
@@ -67,3 +67,7 @@ The **chatbox** template takes multiple optional parameters which customize the 
 
 - **errorText** - Error modal title
 	- **Default:** 'An Error Occured, Please Try Again Later'
+
+### TagLib
+
+**Slack Feedback** also adds a taglib (the namespace is **sf**) which can be used to render user messages and message counts. The docs are included in the JavaDocs of the taglib.
