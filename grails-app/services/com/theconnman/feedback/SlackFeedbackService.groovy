@@ -54,7 +54,7 @@ class SlackFeedbackService {
 			} else {
 				String text = textArray.tail().join(':').trim();
 				new Message(username: user.username, seen: false, respondent: parameters.user_name, text: text).save();
-				return '';
+				return 'Message successfully sent';
 			}
 		}
 	}
