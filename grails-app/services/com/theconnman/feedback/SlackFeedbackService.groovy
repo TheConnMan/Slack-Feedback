@@ -40,4 +40,21 @@ class SlackFeedbackService {
 			return false;
 		}
 	}
+
+	String receivePost(Map parameters) {
+		Collection<String> textArray = (parameters.text - parameters.trigger_word).trim().split(':');
+		if (textArray.size() == 1) {
+			return 'No delimiter found, make sure to construct the message in the form [trigger word] [username]: [message]';
+		} else {
+			String username = textArray.first();
+			User user = User.findByUsername(username);
+			if (!user) {
+				return 'No user by the name of ' + username + ' found'
+			} else {
+				String text = textArray.tail().join(':').trim();
+				new Message(user: user, see: false, text: text).save();
+				return '';
+			}
+		}
+	}
 }

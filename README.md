@@ -10,6 +10,10 @@ Chat box for quick app feedback sent to a Slack channel from a Grails project.
 - Semantic UI
 	- *Currently **Slack Feedback** only supports use with the **Semantic UI** frontend framework*
 
+### Optional
+
+- Slack account with Outgoing WebHooks integration
+
 ## Setup
 
 ### Slack
@@ -25,7 +29,8 @@ All config items contain the prefix **grails.plugin.slackfeedback.**
 
 **NOTE:** Config items with * after them are secret information. It is highly reccommended to put this information in secret files and pull it into the Grails project at runtime.
 
-- **webhook** - The WebHook URL provided by Slack*
+- **webhook** - The Incoming WebHook URL provided by Slack*
+- **token** - The Outgoing WebHook token provided by Slack* [Optional]
 - **channel** - The channel to post to [Optional]
 
 ## Use

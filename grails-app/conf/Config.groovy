@@ -30,6 +30,7 @@ grails {
 	plugin {
 		slackfeedback {
 			webhook = localConfig.slackfeedback.webhook
+			token = localConfig.slackfeedback.token
 		}
 	}
 }
