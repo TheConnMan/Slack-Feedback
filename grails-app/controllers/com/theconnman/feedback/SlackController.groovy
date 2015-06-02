@@ -7,6 +7,6 @@ class SlackController {
 	def slackFeedbackService
 
     def submit() {
-		render([success: slackFeedbackService.send(params.feedback)] as JSON)
+		render([success: slackFeedbackService.submit(params.feedback)] as JSON)
 	}
 }
