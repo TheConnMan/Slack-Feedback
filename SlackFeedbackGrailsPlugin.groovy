@@ -1,20 +1,22 @@
 class SlackFeedbackGrailsPlugin {
     // the plugin version
-    def version = "1.0.0"
+    def version = "2.0.0"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "2.3 > *"
     // resources that are excluded from plugin packaging
     def pluginExcludes = [
         "grails-app/views/error.gsp",
         "grails-app/views/test/index.gsp",
-		"grails-app/controllers/com/theconnman/feedback/Test.groovy"
+		"grails-app/domain/com/theconnman/feedback/User.groovy",
+		"grails-app/controllers/com/theconnman/feedback/Test.groovy",
+		"grails-app/services/com/theconnman/feedback/SpringSecurityService.groovy"
     ]
 
     // TODO Fill in these fields
     def title = "Slack Feedback Plugin" // Headline display name of the plugin
     def author = "TheConnMan"
     def authorEmail = "brian@theconnman.com"
-    def description = 'Chat box for quick app feedback sent to a Slack channel.'
+    def description = 'Chat box for quick app feedback sent to a Slack channel from a Grails project. Optionally the plugin can be configured to allow responses from Slack back to the application users.'
 
     // URL to the plugin's documentation
     def documentation = "https://github.com/TheConnMan/Slack-Feedback"
@@ -22,7 +24,7 @@ class SlackFeedbackGrailsPlugin {
     // Extra (optional) plugin metadata
 
     // License: one of 'APACHE', 'GPL2', 'GPL3'
-    def license = "APACHE"
+    def license = "MIT"
 
     // Details of company behind the plugin (if there is one)
 //    def organization = [ name: "My Company", url: "http://www.my-company.com/" ]
