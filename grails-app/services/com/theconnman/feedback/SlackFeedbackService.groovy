@@ -48,9 +48,9 @@ class SlackFeedbackService {
 		} else {
 			String username = textArray.first();
 			def User = getUserDomain();
-			def user = User.findByUsername(username);
+			def user = User.findByUsernameIlike(username);
 			if (!user) {
-				return 'No user by the name of ' + username + ' found'
+				return 'No user by the name of *' + username + '* found'
 			} else {
 				String text = textArray.tail().join(':').trim();
 				new Message(username: user.username, seen: false, respondent: parameters.user_name, text: text).save();
