@@ -7,8 +7,10 @@ class SlackFeedbackGrailsPlugin {
     def pluginExcludes = [
         "grails-app/views/error.gsp",
         "grails-app/views/test/index.gsp",
+        "grails-app/views/layouts/semantic.gsp",
+		"grails-app/conf/BootStrap.groovy",
 		"grails-app/domain/com/theconnman/feedback/User.groovy",
-		"grails-app/controllers/com/theconnman/feedback/Test.groovy",
+		"grails-app/controllers/com/theconnman/feedback/TestController.groovy",
 		"grails-app/services/com/theconnman/feedback/SpringSecurityService.groovy"
     ]
 
