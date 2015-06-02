@@ -14,7 +14,7 @@
 			</div>
 			<ul>
 				<sf:eachMessage var="message">
-					<li>${ message.text }</li>
+					<li><b>${ message.author }:</b> ${ message.text }</li>
 				</sf:eachMessage>
 			</ul>
 		</div>
