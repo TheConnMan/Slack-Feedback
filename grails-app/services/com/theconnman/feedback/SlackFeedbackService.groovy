@@ -52,7 +52,7 @@ class SlackFeedbackService {
 				return 'No user by the name of ' + username + ' found'
 			} else {
 				String text = textArray.tail().join(':').trim();
-				new Message(user: user, see: false, respondent: parameters.user_name, text: text).save();
+				new Message(user: user, seen: false, respondent: parameters.user_name, text: text).save();
 				return '';
 			}
 		}

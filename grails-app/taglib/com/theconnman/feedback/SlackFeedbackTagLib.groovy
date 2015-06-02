@@ -20,7 +20,7 @@ class SlackFeedbackTagLib {
 		Message.findAllByUser(user, [sort: 'dateCreated', order: attrs.order ?: 'asc', max: attrs.max, offset: attrs.offset ?: 0]).each { Message message ->
 			if (attrs.see == null || attrs.see == 'true') {
 				message.seen = true;
-				message.save();
+				message.save(flush: true);
 			}
 			out << body((attrs.var ?: 'it'): message)
 		}
