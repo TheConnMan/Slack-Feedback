@@ -34,7 +34,7 @@ class SlackFeedbackService {
 	boolean save(String feedback) {
 		def user = springSecurityService.currentUser;
 		try {
-			new Message(user: user, text: feedback[0..(Math.min(feedback.size(), 5000) - 1)]).save();
+			new Message(username: user.username, text: feedback[0..(Math.min(feedback.size(), 5000) - 1)]).save();
 			return true;
 		} catch (e) {
 			return false;
@@ -53,7 +53,7 @@ class SlackFeedbackService {
 				return 'No user by the name of ' + username + ' found'
 			} else {
 				String text = textArray.tail().join(':').trim();
-				new Message(user: user, seen: false, respondent: parameters.user_name, text: text).save();
+				new Message(username: user.username, seen: false, respondent: parameters.user_name, text: text).save();
 				return '';
 			}
 		}

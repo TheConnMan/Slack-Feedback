@@ -17,7 +17,7 @@ class SlackFeedbackTagLib {
 	 */
 	def eachMessage = { attrs, body ->
 		def user = springSecurityService.currentUser;
-		Message.findAllByUser(user, [sort: 'dateCreated', order: attrs.order ?: 'asc', max: attrs.max, offset: attrs.offset ?: 0]).each { Message message ->
+		Message.findAllByUsername(user.username, [sort: 'dateCreated', order: attrs.order ?: 'asc', max: attrs.max, offset: attrs.offset ?: 0]).each { Message message ->
 			if (attrs.see == null || attrs.see == 'true') {
 				message.seen = true;
 				message.save(flush: true);
@@ -31,6 +31,6 @@ class SlackFeedbackTagLib {
 	 */
 	def unseenCount = {
 		def user = springSecurityService.currentUser;
-		out << Message.countByUserAndSeen(user, false)
+		out << Message.countByUsernameAndSeen(user.username, false)
 	}
 }

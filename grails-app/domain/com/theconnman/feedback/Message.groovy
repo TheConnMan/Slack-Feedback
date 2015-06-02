@@ -2,14 +2,14 @@ package com.theconnman.feedback
 
 class Message {
 
-	User user
+	String username
 	Date dateCreated
 	boolean seen = true
 	String respondent
 	String text
 
 	static constraints = {
-		user()
+		username()
 		dateCreated()
 		seen()
 		respondent nullable: true
@@ -17,6 +17,6 @@ class Message {
 	}
 
 	String getAuthor() {
-		return respondent ?: user.username;
+		return respondent ?: username;
 	}
 }
