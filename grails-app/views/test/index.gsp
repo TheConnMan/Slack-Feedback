@@ -3,20 +3,30 @@
 	<head>
 		<meta name="layout" content="semantic"/>
 		<title>Slack Feedback</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.4.1/jquery.timeago.min.js" charset="utf-8"></script>
 	</head>
 	<body>
 		<div class="ui segment">
-			<h1>Slack Feedback Plugin</h1>
-			<g:render template="/layouts/chatbox" model="[title: 'Need help or have some feedback?']" />
-			<div class="ui primary button" onclick="slackFeedback()">Feedback</div>
-			<div>
-				Unseen: <sf:unseenCount />
-			</div>
-			<ul>
+			<h1 class="ui header">Messages</h1>
+			<div class="ui feed">
 				<sf:eachMessage var="message">
-					<li><b>${ message.author }:</b> ${ message.text }</li>
+					<div class="event">
+						<div class="content">
+							<div class="summary">
+								${ message.author } <abbr class="timeago date" title="${ message.dateCreated }"></abbr>
+							</div>
+							<div class="extra text">
+								${ message.text }
+							</div>
+						</div>
+					</div>
 				</sf:eachMessage>
-			</ul>
+			</div>
 		</div>
+		<script>
+			$(function() {
+				$('.timeago').timeago();
+			});
+		</script>
 	</body>
 </html>

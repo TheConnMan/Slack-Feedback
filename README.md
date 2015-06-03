@@ -5,33 +5,22 @@ Chat box for quick app feedback sent to a Slack channel from a Grails project. O
 
 ## Requirements
 
-- Slack account with Incoming WebHooks integration
+- Slack account with Admin permissions
 - jQuery
 - Grails project with Spring Security installed
 - Semantic UI
-	- *Currently **Slack Feedback** only supports use with the **Semantic UI** frontend framework*
+	- **NOTE:** Currently **Slack Feedback** only supports use with the **Semantic UI** frontend framework, additional instructions for use without **Semantic UI** will be a future improvement
 
-### Optional
+## Feedback from Grails to Slack
 
-- Slack account with Outgoing WebHooks integration
+This is the basic configuration of **Slack Feedback** and possible even if your application is hidden behind a firewall. User feedback can be posted from the Grails application out to Slack.
 
-## Setup
-
-### Slack
-
-#### Required
+### Slack Requirements
 
 - Create an [Incoming WebHooks integration](https://my.slack.com/services/new/incoming-webhook)
 - Select a channel to post messages to
 	- **NOTE:** This can be overwritten in the config. This is helpful if multiple projects use the same webhook.
 - Add the WebHook url to the config as shown below
-
-#### Optional
-
-- Create an [Outgoing WebHooks integraion](https://my.slack.com/services/new/outgoing-webhook)
-- Select a channel to post messages to
-- Add a set of trigger words
-- Add `[url]/slack/post` where `[url]` is the URL of your publicly visible Grails application
 
 ### Config
 
@@ -41,10 +30,9 @@ All config items contain the prefix **grails.plugin.slackfeedback.**
 
 - **webhook** - The Incoming WebHook URL provided by Slack*
 - **channel** - The channel to post to [Optional]
-- **token** - The Outgoing WebHook token provided by Slack* [Required for Outgoing WebHooks]
 - **userDomainClassName** - The full package name of the Spring Security User object (e.g. 'com.theconnman.feedback.User') [Required for Outgoing WebHooks]
 
-## Use
+### Chatbox Layout
 
 **Slack Feedback** provides a single layout template which contains all necessary HTML and JavaScript. A basic use of the layout is below:
 
@@ -57,6 +45,8 @@ To trigger the modals contined within the template call the JavaScript function 
 ```
 <div class="ui primary button" onclick="slackFeedback()">Feedback</div>
 ```
+
+An example using the **Chatbox** layout and trigger in a Semantic UI menu can be found in the [Slack Feedback](https://github.com/TheConnMan/Slack-Feedback/blob/master/grails-app/views/layouts/semantic.gsp) plugin test project.
 
 ### Layout Parameters
 
@@ -84,15 +74,30 @@ The **chatbox** template takes multiple optional parameters which customize the 
 - **errorText** - Error modal title
 	- **Default:** 'An Error Occured, Please Try Again Later'
 
-### Slack Responses
+## Feedback from Slack to Grails
 
-It's on thing to have feedback come into Slack, it's another to be able to respond back to the app from within Slack.
+It's one thing to have feedback come into Slack, it's another to be able to respond back to the app from within Slack. Below are instructions on how to configure Outgoing WebHooks for Slack and use them to communicate back to your Grails application.
 
-### TagLib
+### Slack Requirements
 
-**Slack Feedback** also adds a taglib (the namespace is **sf**) which can be used to render user messages and message counts. The docs are included in the JavaDocs of the taglib.
+- Create an [Outgoing WebHooks integraion](https://my.slack.com/services/new/outgoing-webhook)
+- Select a channel to post messages to
+- Add a set of trigger words
+- Add `[url]/slack/post` where `[url]` is the URL of your publicly visible Grails application
 
-### Response Syntax
+### Config
+
+The same instructions from the above **Config** section apply.
+
+- **token** - The Outgoing WebHook token provided by Slack* [Required for Outgoing WebHooks]
+
+### SF TagLib
+
+**Slack Feedback** also adds a taglib (the namespace is **sf**) which can be used to render user messages and message counts. The docs are included in the JavaDocs of the taglib. Examples of how to use the taglib tags can be found in the [example views](https://github.com/TheConnMan/Slack-Feedback/tree/master/grails-app/views/test) in the plugin.
+
+For `<sf:eachMessage>` the body of the tag is executed for each message a user has. For a full list of fields for the Message object refer to the [Message domain object](https://github.com/TheConnMan/Slack-Feedback/blob/master/grails-app/domain/com/theconnman/feedback/Message.groovy). The use of `message.author` is encouraged instead of directly calling `message.respondent`.
+
+### Slack Response Syntax
 
 During the Slack Outgoing WebHooks integration setup a set of trigger words were set up. The following syntax must be used when sending a message through Slack on a channel set up with the Outgoing WebHook:
 
@@ -101,3 +106,7 @@ During the Slack Outgoing WebHooks integration setup a set of trigger words were
 The following is an example of the correct format:
 
 `Message admin: Test message to admin using the trigger word Message`
+
+## Development
+
+Thank you for taking an interest furthering the development of **Slack Feedback**. Testing integration with Slack can be a bit difficult especially when a development machine needs to receive a POST request from Slack. To get around this issue I use the [Advanced REST client](https://chrome.google.com/webstore/detail/advanced-rest-client/hgmloofddffdnphfgcellkdfbfbjeloo) for Chrome to simulate Slack POSTs to the system. Outgoing WebHook integrations provide a sample POST request which I modified slightly to send through the REST client. For outgoing feedback I created a test channel in my personal Slack account to send data out to.
