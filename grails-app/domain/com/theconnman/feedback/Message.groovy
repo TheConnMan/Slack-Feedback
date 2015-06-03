@@ -17,6 +17,6 @@ class Message {
 	}
 
 	String getAuthor() {
-		return respondent ?: username;
+		return respondent ?: username
 	}
 }

@@ -10,57 +10,56 @@ class SlackFeedbackService {
 	def springSecurityService
 
 	boolean submit(String feedback) {
-		return send(feedback) && save(feedback);
+		return send(feedback) && save(feedback)
 	}
 
 	boolean send(String feedback) {
-		String user = springSecurityService.currentUser.username;
-		def config = grailsApplication.mergedConfig.grails.plugin.slackfeedback;
-		RestBuilder rest = new RestBuilder();
+		String user = springSecurityService.principal.username
+		def config = grailsApplication.mergedConfig.grails.plugin.slackfeedback
 		try {
-			def resp = rest.post(config.webhook) {
+			def resp = new RestBuilder().post(config.webhook) {
 				json {
 					text = feedback
 					username = user
 					channel = config.channel
 				}
 			}
-			return true;
+			return true
 		} catch (e) {
-			return false;
+			return false
 		}
 	}
 
 	boolean save(String feedback) {
-		def user = springSecurityService.currentUser;
+		def user = springSecurityService.principal
 		try {
-			new Message(username: user.username, text: feedback[0..(Math.min(feedback.size(), 5000) - 1)]).save();
-			return true;
+			new Message(username: user.username, text: feedback[0..(Math.min(feedback.size(), 5000) - 1)]).save()
+			return true
 		} catch (e) {
-			return false;
+			return false
 		}
 	}
 
 	String receivePost(Map parameters) {
-		Collection<String> textArray = (parameters.text - parameters.trigger_word).trim().split(':');
+		Collection<String> textArray = (parameters.text - parameters.trigger_word).trim().split(':')
 		if (textArray.size() == 1) {
-			return 'No delimiter found, make sure to construct the message in the form [trigger word] [username]: [message]';
-		} else {
-			String username = textArray.first();
-			def User = getUserDomain();
-			def user = User.findByUsernameIlike(username);
-			if (!user) {
-				return 'No user by the name of *' + username + '* found'
-			} else {
-				String text = textArray.tail().join(':').trim();
-				new Message(username: user.username, seen: false, respondent: parameters.user_name, text: text).save();
-				return 'Message successfully sent';
-			}
+			return 'No delimiter found, make sure to construct the message in the form [trigger word] [username]: [message]'
 		}
+
+		String username = textArray.first()
+		def User = getUserDomain()
+		def user = User.findByUsernameIlike(username)
+		if (!user) {
+			return 'No user by the name of *' + username + '* found'
+		}
+
+		String text = textArray.tail().join(':').trim()
+		new Message(username: user.username, seen: false, respondent: parameters.user_name, text: text).save()
+		return 'Message successfully sent'
 	}
 
 	def getUserDomain() {
-		String className = grailsApplication.mergedConfig.grails.plugin.slackfeedback.userDomainClassName;
-		return grailsApplication.getClassForName(className);
+		String className = grailsApplication.mergedConfig.grails.plugin.slackfeedback.userDomainClassName
+		return grailsApplication.getClassForName(className)
 	}
 }

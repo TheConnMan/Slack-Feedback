@@ -2,7 +2,7 @@ package com.theconnman.feedback
 
 class SlackFeedbackTagLib {
 
-	static namespace = 'sf';
+	static namespace = 'sf'
 
 	def springSecurityService
 
@@ -16,15 +16,14 @@ class SlackFeedbackTagLib {
 	 * @attr see Updated all shown messages to 'seen' (Default: true)
 	 */
 	def eachMessage = { attrs, body ->
-		def user = springSecurityService.currentUser;
-		Collection<Message> messages = Message.findAllByUsername(user.username, [sort: 'dateCreated', order: 'desc', max: attrs.max, offset: attrs.offset ?: 0]);
+		Collection<Message> messages = Message.findAllByUsername(username, [sort: 'dateCreated', order: 'desc', max: attrs.max, offset: attrs.offset ?: 0])
 		if (attrs.order != 'desc') {
-			messages = messages.reverse();
+			messages = messages.reverse()
 		}
 		messages.each { Message message ->
 			if (attrs.see == null || attrs.see == 'true') {
-				message.seen = true;
-				message.save(flush: true);
+				message.seen = true
+				message.save(flush: true)
 			}
 			out << body((attrs.var ?: 'it'): message)
 		}
@@ -34,16 +33,14 @@ class SlackFeedbackTagLib {
 	 * Number of unseen messages the current user has.
 	 */
 	def unseenCount = {
-		def user = springSecurityService.currentUser;
-		out << Message.countByUsernameAndSeen(user.username, false)
+		out << Message.countByUsernameAndSeen(username, false)
 	}
 
 	/**
 	 * Renders content if the current user has any unseen messages.
 	 */
 	def ifHasUnseen = { attrs, body ->
-		def user = springSecurityService.currentUser;
-		if (Message.countByUsernameAndSeen(user.username, false) != 0) {
+		if (Message.countByUsernameAndSeen(username, false) != 0) {
 			out << body()
 		}
 	}
@@ -52,9 +49,12 @@ class SlackFeedbackTagLib {
 	 * Renders content if the current user has no unseen messages.
 	 */
 	def ifHasNoUnseen = { attrs, body ->
-		def user = springSecurityService.currentUser;
-		if (Message.countByUsernameAndSeen(user.username, false) == 0) {
+		if (Message.countByUsernameAndSeen(username, false) == 0) {
 			out << body()
 		}
+	}
+
+	private String getUsername() {
+		springSecurityService.principal.username
 	}
 }
