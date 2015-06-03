@@ -26,11 +26,14 @@
 			<h1 class="ui header">Slack Feedback</h1>
 		</div>
 		<div class="ui menu">
+			<g:link controller="test" action="about" class="item">
+				<i class="home icon"></i> Home
+			</g:link>
 			<div class="ui dropdown item">
-				<i class="icon dropdown"></i> Test
+				<i class="mail icon"></i> <i class="icon dropdown"></i> Messages
 				<div class="menu">
-					<g:link class="item" controller="test">Test Page</g:link>
-					<a class="item" onclick="sendFeedback()">Send Feedback</a>
+					<g:link class="item" controller="test">All Messages</g:link>
+					<a class="item" onclick="slackFeedback()">Send Feedback</a>
 				</div>
 			</div>
 		</div>
@@ -39,9 +42,16 @@
 			<g:layoutBody/>
 		</div>
 		<div class="content">
-			<div class="ui segment" style="margin-bottom: 15px;">
+			<div class="ui segment" style="margin-top: 15px;">
 				<b>Slack Feedback ${ applicationContext.getBean('pluginManager').getGrailsPlugin('slack-feedback').version }</b>
 			</div>
 		</div>
+		<script>
+			$(function() {
+				$('.ui.dropdown').dropdown({
+					on: 'hover'
+				});
+			});
+		</script>
 	</body>
 </html>

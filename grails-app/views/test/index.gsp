@@ -8,7 +8,6 @@
 	<body>
 		<div class="ui segment">
 			<h1 class="ui header">Messages</h1>
-			Unseen Count: <sf:unseenCount />
 			<div class="ui feed">
 				<sf:eachMessage var="message">
 					<div class="event">
@@ -26,9 +25,6 @@
 		</div>
 		<script>
 			$(function() {
-				$('.ui.dropdown').dropdown({
-					on: 'hover'
-				});
 				$('.timeago').timeago();
 			});
 		</script>
