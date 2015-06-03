@@ -95,6 +95,8 @@ The same instructions from the above **Config** section apply.
 
 **Slack Feedback** also adds a taglib (the namespace is **sf**) which can be used to render user messages and message counts. The docs are included in the JavaDocs of the taglib. Examples of how to use the taglib tags can be found in the [example views](https://github.com/TheConnMan/Slack-Feedback/tree/master/grails-app/views/test) in the plugin.
 
+For `<sf:eachMessage>` the body of the tag is executed for each message a user has. For a full list of fields for the Message object refer to the [Message domain object](https://github.com/TheConnMan/Slack-Feedback/blob/master/grails-app/domain/com/theconnman/feedback/Message.groovy). The use of `message.author` is encouraged instead of directly calling `message.respondent`.
+
 ### Slack Response Syntax
 
 During the Slack Outgoing WebHooks integration setup a set of trigger words were set up. The following syntax must be used when sending a message through Slack on a channel set up with the Outgoing WebHook:
