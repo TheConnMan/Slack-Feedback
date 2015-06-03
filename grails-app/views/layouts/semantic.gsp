@@ -31,6 +31,9 @@
 			</g:link>
 			<div class="ui dropdown item">
 				<i class="mail icon"></i> <i class="icon dropdown"></i> Messages
+				<sf:ifHasUnseen>
+					<div class="floating ui teal label"><sf:unseenCount /></div>
+				</sf:ifHasUnseen>
 				<div class="menu">
 					<g:link class="item" controller="test">All Messages</g:link>
 					<a class="item" onclick="slackFeedback()">Send Feedback</a>

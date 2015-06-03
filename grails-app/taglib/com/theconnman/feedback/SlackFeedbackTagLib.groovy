@@ -25,12 +25,32 @@ class SlackFeedbackTagLib {
 			out << body((attrs.var ?: 'it'): message)
 		}
 	}
-	
+
 	/**
-	 * Number of unseen messages.
+	 * Number of unseen messages the current user has.
 	 */
 	def unseenCount = {
 		def user = springSecurityService.currentUser;
 		out << Message.countByUsernameAndSeen(user.username, false)
+	}
+
+	/**
+	 * Renders content if the current user has any unseen messages.
+	 */
+	def ifHasUnseen = { attrs, body ->
+		def user = springSecurityService.currentUser;
+		if (Message.countByUsernameAndSeen(user.username, false) != 0) {
+			out << body()
+		}
+	}
+
+	/**
+	 * Renders content if the current user has no unseen messages.
+	 */
+	def ifHasNoUnseen = { attrs, body ->
+		def user = springSecurityService.currentUser;
+		if (Message.countByUsernameAndSeen(user.username, false) == 0) {
+			out << body()
+		}
 	}
 }
