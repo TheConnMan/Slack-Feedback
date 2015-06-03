@@ -104,3 +104,7 @@ During the Slack Outgoing WebHooks integration setup a set of trigger words were
 The following is an example of the correct format:
 
 `Message admin: Test message to admin using the trigger word Message`
+
+## Development
+
+Thank you for taking an interest furthering the development of **Slack Feedback**. Testing integration with Slack can be a bit difficult especially when a development machine needs to receive a POST request from Slack. To get around this issue I use the [Advanced REST client](https://chrome.google.com/webstore/detail/advanced-rest-client/hgmloofddffdnphfgcellkdfbfbjeloo) for Chrome to simulate Slack POSTs to the system. Outgoing WebHook integrations provide a sample POST request which I modified slightly to send through the REST client. For outgoing feedback I created a test channel in my personal Slack account to send data out to.
