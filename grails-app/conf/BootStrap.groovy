@@ -1,8 +1,8 @@
-import com.theconnman.feedback.User;
+import com.theconnman.feedback.User
 
 class BootStrap {
 
-	def init = { servletContext ->
-		new User(username: 'Test User').save();
+	def init = {
+		new User(username: 'Test User').save()
 	}
 }
