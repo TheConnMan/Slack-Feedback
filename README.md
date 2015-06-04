@@ -3,6 +3,9 @@ Slack Feedback
 
 Chat box for quick app feedback sent to a Slack channel from a Grails project. Optionally the plugin can be configured to allow responses from Slack back to the application users.
 
+![Feedback in Grails](https://raw.githubusercontent.com/TheConnMan/Slack-Feedback/dev/resources/SlackFeedback-Grails.png)
+![Feedback in Slack](https://raw.githubusercontent.com/TheConnMan/Slack-Feedback/dev/resources/SlackFeedback-Slack.png)
+
 ## Requirements
 
 - Slack account with Admin permissions
