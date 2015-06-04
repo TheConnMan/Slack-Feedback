@@ -1,5 +1,5 @@
 class SlackFeedbackGrailsPlugin {
-	def version = "2.1.0"
+	def version = "2.1.1"
 	def grailsVersion = "2.3 > *"
 	def pluginExcludes = [
 		"grails-app/views/test/*",
